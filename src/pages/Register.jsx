@@ -4,6 +4,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 const Register = () => {
   const { createUser } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const handelRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -12,27 +13,28 @@ const Register = () => {
     const photo = e.target.photo.value;
     console.log(name, email, password, photo);
 
-    // error reset
-    setError("");
-
-
-    if (password.length > 6) {
-      setError("Password must be 6 character or longer");
-    }
-    if (!/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{6}$/.test(password)) {
-      setError(
-        "Password should have at least character uppercase and lowercase"
-      );
-    }
-
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+        setSuccess("User register successful");
       })
       .catch((error) => {
         console.error(error.message);
-        setError(error.message)
+        setError(error.message);
       });
+
+    // error reset
+    setError("");
+    setSuccess("");
+
+    if (password.length > 6) {
+      return setError("Password must be 6 character or longer");
+    }
+    if (!/^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{6}$/.test(password)) {
+      return setError(
+        "Password should have at least character uppercase and lowercase"
+      );
+    }
   };
   return (
     <div className="hero bg-base-200 ">
@@ -78,6 +80,7 @@ const Register = () => {
 
                 <button className="btn btn-neutral mt-4">Register</button>
                 {error && <p className="text-red-600">{error}</p>}
+                {success && <p className="text-green-600">{success}</p>}
               </fieldset>
             </form>
           </div>
