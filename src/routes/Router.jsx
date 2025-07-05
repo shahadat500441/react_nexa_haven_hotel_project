@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import EstateDetailsPage from "../pages/EstateDetailsPage";
 
 
 
@@ -18,7 +19,13 @@ import Login from "../pages/Login";
     children:[
         {
             path:"/",
-            element:<Home></Home>
+            element:<Home></Home>,
+            loader:()=>fetch("/estates.json")
+        },
+        {
+          path:"/estate/:id",
+          element:<EstateDetailsPage></EstateDetailsPage>,
+         
         },
         {
         path:"/register",
