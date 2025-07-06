@@ -1,20 +1,20 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData} from "react-router-dom";
+import DetailsCard from "../components/DetailsCard";
+
 
 const EstateDetailsPage = () => {
-    const estate = useLoaderData();
-    console.log(estate)
-
-    
+  const information= useLoaderData();
+  console.log(information);
   
 
   
-    return (
-        <div>
-        <h1>This is details page</h1>
-        
-        </div>
-    );
+  return (
+    <div className=" mx-5">
+      {
+        information.map((info)=><DetailsCard key={info.id} info={info}></DetailsCard>)
+      }
+    </div>
+  );
 };
 
 export default EstateDetailsPage;

@@ -3,10 +3,31 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser,googleSignIn ,githubSignIn} = useContext(AuthContext);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+
+
+  const handelGoogleSignIn = ()=>{
+    googleSignIn()
+    .then(result=>{
+      console.log(result.user)
+    })
+    .catch(error=>{
+      console.error(error.message)
+    })
+  }
+
+  const handelGithubSignIn = ()=>{
+    githubSignIn()
+    .then(result=>{
+      console.log(result.user)
+    })
+    .catch(error=>{
+      console.error(error.message)
+    })
+  }
   const handelRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -95,6 +116,8 @@ const Register = () => {
                 {success && <p className="text-green-600">{success}</p>}
               </fieldset>
             </form>
+            <button onClick={handelGoogleSignIn} className="btn btn-primary">Google SignIn</button>
+            <button onClick={handelGithubSignIn} className="btn btn-primary">Github SignIn</button>
           </div>
         </div>
       </div>
