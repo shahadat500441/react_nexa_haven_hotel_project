@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const Navbar = () => {
-const {  user,logOut,userUpdateProfile}= useContext(AuthContext);
+const {  user,logOut}= useContext(AuthContext);
 
 const handelLogOut= ()=>{
  logOut()
@@ -47,7 +47,7 @@ const handelLogOut= ()=>{
   </div>
   <div className="navbar-end">
     {user ? <>
-    {user.email}
+   <img className="w-10 h-10 rounded-full mr-2 border" src={user.photoURL} alt="" />
     <span onClick={handelLogOut}><button className="btn bg-red-700 text-white ">LogOut</button></span>
     </> :<Link to="/login"><button className="btn btn-primary text-white">Login</button></Link>}
   </div>

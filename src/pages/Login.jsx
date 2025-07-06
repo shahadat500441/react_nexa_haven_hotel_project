@@ -6,6 +6,7 @@ import{ useLocation,useNavigate} from "react-router-dom"
 const Login = () => {
 
     const {loginUser}= useContext(AuthContext)
+    
     const navigate= useNavigate();
     const location = useLocation()
   const handelLogin = (e) => {
@@ -13,6 +14,7 @@ const Login = () => {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
+    
         loginUser(email,password)
         .then(result=>{
             console.log(result.user)

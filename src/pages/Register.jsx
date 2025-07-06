@@ -3,7 +3,7 @@ import { IoEye, IoEyeOff } from "react-icons/io5";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Register = () => {
-  const { createUser,googleSignIn ,githubSignIn} = useContext(AuthContext);
+  const { createUser,googleSignIn ,githubSignIn,userUpdateProfile} = useContext(AuthContext);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(true);
@@ -53,6 +53,8 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
+        userUpdateProfile(name,image)
+        .then()
         console.log(result.user);
         setSuccess("User register Successfull")
         e.target.reset();
